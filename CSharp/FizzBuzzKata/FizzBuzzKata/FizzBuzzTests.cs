@@ -1,15 +1,18 @@
+using FizzBuzzLogic;
+using FizzBuzzLogic.Contract;
+using FizzBuzzLogic.Implementation;
 using NUnit.Framework;
 
 namespace FizzBuzzKata
 {
     public class FizzBuzzTests
     {
-        private IFizzBuzzConverter _fizzBuzzConverter;
+        private IConverter _converter;
 
         [SetUp]
         public void Setup()
         {
-            _fizzBuzzConverter = new FizzBuzzConverter();
+            _converter = new Converter(new FizzConverter(),new BuzzConverter());
         }
 
         [Test]
@@ -18,7 +21,7 @@ namespace FizzBuzzKata
             //arrange
 
             //act
-            _fizzBuzzConverter = new FizzBuzzConverter();
+            _converter = new Converter(new FizzConverter(),new BuzzConverter());
 
             //assert
             Assert.Pass("Initialize successful");
@@ -31,7 +34,7 @@ namespace FizzBuzzKata
             const int parameter = 0;
 
             //act
-            var current= _fizzBuzzConverter.Convert(parameter);
+            var current= _converter.Convert(parameter);
 
             //assert
             Assert.AreEqual(parameter.ToString(),current);
@@ -44,7 +47,7 @@ namespace FizzBuzzKata
             const int parameter = 3;
 
             //act
-            var current = _fizzBuzzConverter.Convert(parameter);
+            var current = _converter.Convert(parameter);
 
             //assert
             Assert.AreEqual("FIZZ", current);
@@ -57,7 +60,7 @@ namespace FizzBuzzKata
             const int parameter = 4;
 
             //act
-            var current = _fizzBuzzConverter.Convert(parameter);
+            var current = _converter.Convert(parameter);
 
             //assert
             Assert.AreEqual("4", current);
@@ -70,7 +73,7 @@ namespace FizzBuzzKata
             const int parameter = 5;
 
             //act
-            var current = _fizzBuzzConverter.Convert(parameter);
+            var current = _converter.Convert(parameter);
 
             //assert
             Assert.AreEqual("BUZZ", current);
@@ -83,7 +86,7 @@ namespace FizzBuzzKata
             const int parameter = 6;
 
             //act
-            var current = _fizzBuzzConverter.Convert(parameter);
+            var current = _converter.Convert(parameter);
 
             //assert
             Assert.AreEqual("FIZZ", current);
@@ -96,7 +99,7 @@ namespace FizzBuzzKata
             const int parameter = 7;
 
             //act
-            var current = _fizzBuzzConverter.Convert(parameter);
+            var current = _converter.Convert(parameter);
 
             //assert
             Assert.AreEqual("7", current);
@@ -109,7 +112,7 @@ namespace FizzBuzzKata
             const int parameter = 9;
 
             //act
-            var current = _fizzBuzzConverter.Convert(parameter);
+            var current = _converter.Convert(parameter);
 
             //assert
             Assert.AreEqual("FIZZ", current);
@@ -122,7 +125,7 @@ namespace FizzBuzzKata
             const int parameter = 10;
 
             //act
-            var current = _fizzBuzzConverter.Convert(parameter);
+            var current = _converter.Convert(parameter);
 
             //assert
             Assert.AreEqual("BUZZ", current);
@@ -135,7 +138,7 @@ namespace FizzBuzzKata
             const int parameter = 12;
 
             //act
-            var current = _fizzBuzzConverter.Convert(parameter);
+            var current = _converter.Convert(parameter);
 
             //assert
             Assert.AreEqual("FIZZ", current);
@@ -148,7 +151,7 @@ namespace FizzBuzzKata
             const int parameter = 15;
 
             //act
-            var current = _fizzBuzzConverter.Convert(parameter);
+            var current = _converter.Convert(parameter);
 
             //assert
             Assert.AreEqual("FIZZBUZZ", current);
