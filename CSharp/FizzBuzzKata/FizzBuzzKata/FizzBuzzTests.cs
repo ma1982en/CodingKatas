@@ -1,4 +1,3 @@
-using FizzBuzzLogic;
 using FizzBuzzLogic.Contract;
 using FizzBuzzLogic.Implementation;
 using NUnit.Framework;
