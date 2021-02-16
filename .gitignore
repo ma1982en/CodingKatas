@@ -3,3 +3,4 @@ obj
 target
 *.suo
 *.user
+/CSharp/FizzBuzzKata/.vs
