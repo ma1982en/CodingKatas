@@ -1,6 +1,4 @@
-use std::collections::LinkedList;
-
-pub fn calculate (left: i32, right: i32) -> i32 {
+pub fn calculate (left: i32,right: i32) -> i32 {
 
     if left == 0 || right == 0 {
         return 0;
@@ -14,50 +12,37 @@ pub fn calculate (left: i32, right: i32) -> i32 {
         return left;
     }
 
-    let mut rights: LinkedList<i32> = LinkedList::new();
-    let mut lefts: LinkedList<i32> = LinkedList::new();
-    lefts.push_back(left);
-    rights.push_back(right);
+    let mut rights: Vec<i32> = Vec::new();
+    let mut lefts: Vec<i32> = Vec::new();
+    lefts.push(left);
+    rights.push(right);
+
+    let mut lefttmp = left;
+    let mut righttmp = right;
     loop{
-       let val1: i32 = left /2;
-       println!("left: {}",val1);
-       lefts.push_back(val1);
+       lefttmp = lefttmp / 2;
+       lefts.push(lefttmp);
 
-       let val2: i32 = right * 2;
-       println!("right: {}",val2);
-       rights.push_back(val2);
+       righttmp = righttmp * 2;
+       rights.push(righttmp);
 
-       if val1 == 1 {
+       if lefttmp == 1 {
            break;
        }
     }
 
-    let mut resultlist: LinkedList<i32> = LinkedList::new();
-    let mut iterright = rights.iter();
-    for elem in lefts.iter() {
-        let nextright = iterright.next();
-        if elem % 2 == 0 {            
-            match nextright {
-                Some(n) => println!("1 LEFT = {} right = {}",elem,n),
-                None => break,
-            };            
-        } else {
-            match nextright {
-                Some(n) => {
-                    println!("2 LEFT = {} right = {}",elem,n);
-                    resultlist.push_back(*n);
-            },
-                None => break,
-            };
-            
-        }        
+    for i in 0..lefts.len() {
+        if lefts[i] % 2 == 0 {
+            rights[i] = 0;
+        }
     }
 
-    let mut result: i32 = 0;
-    for elem in resultlist.iter() {
-        println!("Value {}",elem);
-        result += elem;        
+    let mut result = 0;
+    for i in 0..rights.len() {
+        result += rights[i];
+
     }
+
     return result;
 }
 
