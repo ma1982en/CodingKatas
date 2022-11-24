@@ -1,5 +1,4 @@
 ﻿using CSVViewer;
-using static System.Int32;
 
 // Sample data: https://www.census.gov/econ/cbp/download/index.htm
 
@@ -9,17 +8,21 @@ namespace CSV_Kata
     {
         private static void Main(string[] args)
         {
-            int pageLen;
-            if (args.Length <= 1)
+            uint pageLen = 5;
+            if (args.Length > 1)
             {
-                pageLen = 5;
+                if (uint.TryParse(args[1], out var parsedResult))
+                {
+                    if (parsedResult < 5)
+                    {
+                        pageLen = parsedResult;
+                    }
+                    
+                }
             }
-            else
-            {
-                TryParse(args[1], out pageLen);
-            }
+            
 
-            var csvReader = new CsvReader(args[0], pageLen);
+            var csvReader = new CsvReader(args[0],(int) pageLen);
             csvReader.Read();
         }
     }

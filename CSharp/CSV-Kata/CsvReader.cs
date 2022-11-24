@@ -1,4 +1,6 @@
-﻿namespace CSVViewer
+﻿using CSV_Kata.Strategy;
+
+namespace CSVViewer
 {
     public class CsvReader
     {
@@ -36,34 +38,12 @@
                 var cmd = char.ToLower(Console.ReadKey().KeyChar);
                 Console.WriteLine("\n");
 
-                switch (cmd)
+                StrategyContext strategyContext = new StrategyContext(cmd,this.PageLen, rawLines, iFirstLineOfLastPage);
+                var pageDto = strategyContext.Run();
+                if (pageDto != null)
                 {
-                    case 'x':
-                        return;
-
-                    case 'f':
-                        pageLines = rawLines.Take(this.PageLen + 1);
-                        iFirstLineOfLastPage = 1;
-                        break;
-
-                    case 'l':
-                        iFirstLineOfLastPage = rawLines.Length - (rawLines.Length - 1)%this.PageLen;
-                        pageLines = new[] { rawLines[0] }.Concat(rawLines.Where((l, i) => i>0 && i>=iFirstLineOfLastPage));
-                        break;
-
-                    case 'n':
-                        iFirstLineOfLastPage += this.PageLen;
-                        if (iFirstLineOfLastPage >= rawLines.Length)
-                            iFirstLineOfLastPage = rawLines.Length - (rawLines.Length - 1) % this.PageLen;
-                        pageLines = new[] { rawLines[0] }.Concat(rawLines.Where((l, i) => i > 0 && i >= iFirstLineOfLastPage && i < (iFirstLineOfLastPage+this.PageLen)));
-                        break;
-
-                    case 'p':
-                        iFirstLineOfLastPage -= this.PageLen;
-                        if (iFirstLineOfLastPage < 1)
-                            iFirstLineOfLastPage = 1;
-                        pageLines = new[] { rawLines[0] }.Concat(rawLines.Where((l, i) => i > 0 && i >= iFirstLineOfLastPage && i < (iFirstLineOfLastPage+this.PageLen)));
-                        break;
+                    pageLines = pageDto.PageLines;
+                    iFirstLineOfLastPage = pageDto.iFirstLineOfLastPage;
                 }
             }
         }
