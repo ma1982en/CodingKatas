@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CSV-Kata": {
+      "commandName": "Project",
+      "commandLineArgs": "D:\\projects\\CodingKatas\\CSharp\\CSV-Kata\\data.csv"
+    }
+  }
+}
